@@ -1,0 +1,9 @@
+
+<%= render @element %>
+
+<div>
+  <%= link_to "Modificar", edit_element_path(@element) %> |
+  <%= link_to "Volver", elements_path %>
+
+  <%= button_to "Borrar", @element, method: :delete %>
+</div>

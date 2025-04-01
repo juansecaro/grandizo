@@ -1,0 +1,28 @@
+<%= form_with(model: element, class: "needs-validation", novalidate: true) do |form| %>
+  <% if element.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">
+        <%= pluralize(element.errors.count, "error") %> prohibited this element from being saved:
+      </h4>
+      <ul>
+        <% element.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label "Nombre", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label "Precio unitario", class: "form-label" %>
+    <%= form.text_field :price, class: "form-control", type: "number", step: "0.01", required: true %>
+  </div>
+
+  <div class="d-grid">
+    <%= form.submit "Hecho", class: "btn btn-primary" %>
+  </div>
+<% end %>

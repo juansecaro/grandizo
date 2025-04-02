@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get "statics/index"
-  get "statics/simulator"
-  resources :elements
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,4 +12,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "statics#index"
+
+  get "statics/index"
+  get "statics/simulator"
+  resources :elements
+  resources :line_elements, only: [:edit, :update, :destroy]
+  resources :budgets do
+    member do
+      post :add_element
+    end
+  end
+
 end

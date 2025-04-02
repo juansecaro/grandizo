@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2>Editar Elemento</h2>
+
+  <%= form_with model: @line_element, local: true do |f| %>
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" value="<%= @line_element.element.name %>" disabled>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :quantity, "Cantidad", class: "form-label" %>
+      <%= f.number_field :quantity, class: "form-control", step: 0.01, min: 0.01 %>
+    </div>
+
+    <%= f.submit "Guardar Cambios", class: "btn btn-primary" %>
+    <%= link_to "Cancelar", @line_element.budget, class: "btn btn-secondary" %>
+  <% end %>
+</div>

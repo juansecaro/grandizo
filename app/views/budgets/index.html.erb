@@ -1,0 +1,35 @@
+<% content_for :title, "Presupuestos" %>
+
+<div class="container mt-4">
+
+  <div class="mt-4 text-center">
+    <%= link_to "Nuevo Presupuesto", new_budget_path, class: "btn btn-success float-end mx-1" %>
+    <%= link_to "Volver", statics_index_path, class: "btn btn-secondary float-end" %>
+  </div>
+
+  <h1 class="mb-4">Presupuestos</h1>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" id="budgets">
+    <% @budgets.each do |budget| %>
+      <div class="col">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Presupuesto #<%= budget.id %></h5>
+          </div>
+          <div class="card-body">
+            <p><strong>Cliente:</strong> <%= budget.client_name %></p>
+            <p><strong>Total:</strong> <%= number_to_currency(budget.total) %></p>
+          </div>
+          <div class="card-footer text-center">
+            <%= link_to "Ver presupuesto", budget, class: "btn btn-info btn-sm" %>
+            <%= button_to "Eliminar presupuesto", budget_path(budget), method: :delete,
+                        data: { confirm: "¿Seguro que quieres eliminar este presupuesto y sus elementos asociados?" },
+                        class: "btn btn-danger btn-sm mt-2" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+</div>

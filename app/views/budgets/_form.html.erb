@@ -1,0 +1,29 @@
+<%= form_with(model: budget) do |form| %>
+  <% if budget.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(budget.errors.count, "error") %> impidió que este presupuesto se guardara:</h4>
+
+      <ul>
+        <% budget.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :client_name, "Nombre de cliente", class: "form-label" %>
+    <%= form.text_field :client_name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%# Si decides usar notas, descomenta la siguiente parte %>
+    <%# = form.label :notes, "Notas", class: "form-label" %>
+    <%# = form.text_area :notes, class: "form-control", rows: 4 %>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <%= form.submit "Hecho", class: "btn btn-primary" %>
+    <%= link_to "Volver", budgets_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

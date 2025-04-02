@@ -47,3 +47,9 @@ Element.create!(name: "Offset blanco 45x64 80gr (0-10)", price: 0.10 )
 Element.create!(name: "Offset blanco 45x64 80gr (10-100)", price: 0.10 )
 Element.create!(name: "Offset blanco 45x64 80gr (100-1000)", price: 0.10 )
 Element.create!(name: "Offset blanco 45x64 80gr (+1000)", price: 0.10 )
+
+
+# Crear presupuesto de prueba
+budget = Budget.create(client_name: "Cliente Ejemplo")
+budget.add_element(1, 3) # 3 unidades de pintura
+budget.add_element(2, 10.5) # 10.5 metros de madera

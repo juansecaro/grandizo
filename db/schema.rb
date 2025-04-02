@@ -10,11 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_31_030737) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_02_053111) do
+  create_table "budgets", force: :cascade do |t|
+    t.string "client_name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "elements", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "line_elements", force: :cascade do |t|
+    t.integer "budget_id", null: false
+    t.integer "element_id", null: false
+    t.decimal "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_line_elements_on_budget_id"
+    t.index ["element_id"], name: "index_line_elements_on_element_id"
+  end
+
+  add_foreign_key "line_elements", "budgets"
+  add_foreign_key "line_elements", "elements"
 end

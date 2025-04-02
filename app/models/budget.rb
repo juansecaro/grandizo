@@ -2,6 +2,8 @@ class Budget < ApplicationRecord
   has_many :line_elements
   has_many :elements, through: :line_elements
 
+  validates :client_name, presence: true 
+
   def total
     line_elements.includes(:element).sum { |line| line.element.price * line.quantity }
   end

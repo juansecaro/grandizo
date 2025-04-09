@@ -10,13 +10,15 @@ class ElementsController < ApplicationController
   def show
   end
 
-  # GET /elements/new
   def new
     @element = Element.new
+    (params[:add_price_range].to_i + 3).times { @element.price_ranges.build }
   end
 
-  # GET /elements/1/edit
   def edit
+    @element = Element.find(params[:id])
+    params[:add_price_range].to_i.times { @element.price_ranges.build }
+    @element.price_ranges.build if @element.price_ranges.empty?
   end
 
   # POST /elements

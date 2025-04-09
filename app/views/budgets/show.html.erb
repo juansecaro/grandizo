@@ -21,7 +21,7 @@
           <% @budget.line_elements.each do |line| %>
             <tr>
               <td class="text-truncate" style="max-width: 350px;" data-bs-toggle="tooltip" title="<%= line.element.name %>"><%= line.element.name %></td>
-              <td class="text-end"><%= number_to_currency(line.element.price) %></td>
+              <td class="text-end"><%= number_to_currency(line.unit_price) %></td>
               <td class="text-end"><%= number_to_currency line.quantity %></td>
               <td class="text-end fw-bold"><%= number_to_currency(line.line_total) %></td>
               <td class="text-center">
@@ -53,7 +53,8 @@
     <div class="card-body">
       <%= form_with url: add_element_budget_path(@budget), method: :post, class: "row g-2 align-items-end" do |f| %>
         <div class="col-md-8">
-          <%= f.select :element_id, @available_elements.collect { |e| ["#{e.name} (#{number_to_currency(e.price)})", e.id] }, {}, class: "form-select" %>
+        <%= f.select :element_id, @available_elements.collect { |e| [e.name, e.id] }, {}, class: "form-select" %>
+
         </div>
         <div class="col-md-2">
           <%= f.number_field :quantity, step: 0.01, min: 0.01, class: "form-control", placeholder: "Cant.", required: true %>

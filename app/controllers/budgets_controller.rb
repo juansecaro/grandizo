@@ -37,8 +37,14 @@ class BudgetsController < ApplicationController
 
   def add_element
     @budget = Budget.find(params[:id])
-    @budget.line_elements.create(element_id: params[:element_id], quantity: params[:quantity])
-    redirect_to @budget, notice: 'Elemento añadido'
+    @line = @budget.line_elements.build(element_id: params[:element_id], quantity: params[:quantity])
+
+    if @line.save
+      redirect_to budget_path(@budget), notice: "Elemento añadido."
+    else
+      flash.now[:alert] = "Error al añadir elemento."
+      render :show
+    end
   end
 
   private

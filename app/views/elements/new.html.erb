@@ -3,3 +3,7 @@
 <h1>Nuevo elemento</h1>
 
 <%= render "form", element: @element %>
+
+
+<%= button_to "➕ Añadir rango de precio", url_for(add_price_range: 1), method: :get, class: "btn btn-outline-primary mt-3" %>
+

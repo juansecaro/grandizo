@@ -2,10 +2,14 @@ class LineElement < ApplicationRecord
   belongs_to :budget
   belongs_to :element
 
-  validates :quantity, presence: { message: "no puede estar en blanco" }
-  validates :quantity, numericality: { greater_than: 0 }
+  before_validation :set_prices
 
-  def line_total
-    element.price * quantity
+  validates :quantity, presence: true, numericality: { greater_than: 0 }
+
+  def set_prices
+    return unless quantity && element
+
+    self.unit_price = element.price_for(quantity)
+    self.line_total = unit_price * quantity
   end
 end

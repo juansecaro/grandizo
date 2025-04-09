@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
   get "statics/index"
   get "statics/simulator"
-  resources :elements
+  resources :elements do
+    resources :price_ranges, except: [:show]
+  end
+  
   resources :line_elements, only: [:edit, :update, :destroy]
   resources :budgets do
     member do

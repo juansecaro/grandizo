@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_02_053111) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_163145) do
   create_table "budgets", force: :cascade do |t|
     t.string "client_name"
     t.text "notes"
@@ -20,7 +20,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_053111) do
 
   create_table "elements", force: :cascade do |t|
     t.string "name"
-    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,10 +30,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_02_053111) do
     t.decimal "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "unit_price"
+    t.decimal "line_total"
     t.index ["budget_id"], name: "index_line_elements_on_budget_id"
     t.index ["element_id"], name: "index_line_elements_on_element_id"
   end
 
+  create_table "price_ranges", force: :cascade do |t|
+    t.integer "element_id", null: false
+    t.integer "min_quantity"
+    t.integer "max_quantity"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["element_id"], name: "index_price_ranges_on_element_id"
+  end
+
   add_foreign_key "line_elements", "budgets"
   add_foreign_key "line_elements", "elements"
+  add_foreign_key "price_ranges", "elements"
 end

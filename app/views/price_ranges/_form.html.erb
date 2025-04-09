@@ -1,0 +1,21 @@
+<%= form_with model: [@element, @price_range] do |f| %>
+  <div>
+    <%= f.label :min_quantity %>
+    <%= f.number_field :min_quantity, class: "form-control", min: 0, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :max_quantity %>
+    <%= f.number_field :max_quantity, class: "form-control" %>
+    <small>Dejar vacío para sin límite superior</small>
+  </div>
+
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price, class: "form-control", step: 0.01, required: true %>
+  </div>
+
+  <div class="mt-3">
+    <%= f.submit "Guardar", class: "btn btn-primary" %>
+  </div>
+<% end %>
